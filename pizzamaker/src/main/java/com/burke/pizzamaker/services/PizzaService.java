@@ -18,8 +18,7 @@ public class PizzaService {
 	}
 	//TODO: check for adding duplicate pizzas
 	public Pizza createPizza(Pizza p) {
-		Pizza temp = new Pizza(p.getPizzaName(), p.getToppings());
-		return pizzaRepo.save(temp);
+		return pizzaRepo.save(p);
 	}
 	public List<Pizza> getAllPizzas(){
 		return pizzaRepo.findAll();

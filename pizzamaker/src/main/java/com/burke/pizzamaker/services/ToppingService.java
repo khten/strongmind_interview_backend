@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.burke.pizzamaker.exceptions.ToppingNotFoundException;
 import com.burke.pizzamaker.models.Topping;
 import com.burke.repo.ToppingRepo;
 
@@ -18,6 +19,11 @@ public class ToppingService {
 	
 	public List<Topping> getAvailableToppings(){
 		return topRepo.findAll();
+	}
+	
+	public Topping getToppingByName(String s) {
+		return topRepo.findById(s)
+				.orElseThrow(()->new ToppingNotFoundException("topping: " + s + " was not found"));
 	}
 	
 	public void deleteTopping(Topping t) {

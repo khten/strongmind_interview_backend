@@ -3,6 +3,7 @@ package com.burke.pizzamaker.models;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -18,12 +19,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Pizza {
 
+	
 	@Id
-	@Column(unique=true, nullable=false)
+	@Column(unique=true, nullable = false)
 	private String pizzaName;
 	
-	
 	@JsonIgnore
+	@ElementCollection
 	private List<Topping> toppings;
 	
 	

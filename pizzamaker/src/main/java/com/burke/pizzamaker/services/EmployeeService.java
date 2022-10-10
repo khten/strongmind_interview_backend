@@ -1,15 +1,20 @@
 package com.burke.pizzamaker.services;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.burke.pizzamaker.exceptions.UserNotFoundException;
 import com.burke.pizzamaker.models.Employee;
 import com.burke.repo.EmployeeRepo;
 
+
 @Service
 public class EmployeeService {
+	
 	private EmployeeRepo empRepo;
 	
+
 	public EmployeeService(EmployeeRepo empRepo) {
 		this.empRepo = empRepo;
 	}
@@ -22,12 +27,17 @@ public class EmployeeService {
 		 empRepo.delete(e);
 	}
 	
-	public Employee findEmployeeById(long id) {
-		return empRepo.findById(id).orElseThrow(
-				()-> new UserNotFoundException("Employee with id: " + id + " was not found."));
+	
+	public Employee getEmployeeById(Long id) {
+		return empRepo.findById(id)
+				.orElseThrow(()-> new UserNotFoundException("Employee with id: " + id + " was not found."));
 	}
 	
 	public Employee updateEmployee(Employee e) {
 		return empRepo.save(e);
+	}
+
+	public List<Employee> findAllEmployees() {
+		return empRepo.findAll();
 	}
 }
