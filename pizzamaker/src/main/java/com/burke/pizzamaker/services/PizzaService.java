@@ -16,8 +16,11 @@ public class PizzaService {
 	public PizzaService(PizzaRepo pizzaRepo) {
 		this.pizzaRepo = pizzaRepo;
 	}
-	
-	
+	//TODO: check for adding duplicate pizzas
+	public Pizza createPizza(Pizza p) {
+		Pizza temp = new Pizza(p.getPizzaName(), p.getToppings());
+		return pizzaRepo.save(temp);
+	}
 	public List<Pizza> getAllPizzas(){
 		return pizzaRepo.findAll();
 	}
@@ -31,15 +34,10 @@ public class PizzaService {
 		return pizzaRepo.save(p);
 	}
 	
-	public Pizza savePizza(Pizza p) {
-		return pizzaRepo.save(p);
-	}
 	
 	public void deletePizza(Pizza p) {
 		 pizzaRepo.delete(p);
 	}
 	
-	public void makeNewPizza(Pizza p) {
-		pizzaRepo.save(p);
-	}
+
 }
