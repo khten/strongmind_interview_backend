@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.burke.pizzamaker.exceptions.PizzaNotFoundError;
 import com.burke.pizzamaker.models.Pizza;
 import com.burke.repo.PizzaRepo;
 
@@ -25,7 +26,7 @@ public class PizzaService {
 	}
 	
 	public Pizza getPizzaByName(String s) {
-		return pizzaRepo.findByPizzaName(s);
+		return pizzaRepo.findByPizzaName(s).orElseThrow(()->new PizzaNotFoundError("Unable to find pizza: " + s));
 	}
 	
 	

@@ -22,7 +22,9 @@ public class ToppingService {
 	}
 	
 	public Topping getToppingByName(String s) {
-		return topRepo.findById(s)
+		
+		
+		return topRepo.findByName(s)
 				.orElseThrow(()->new ToppingNotFoundException("topping: " + s + " was not found"));
 	}
 	
@@ -37,4 +39,5 @@ public class ToppingService {
 	public Topping addTopping(Topping t) {
 		return topRepo.save(t);
 	}
+
 }
