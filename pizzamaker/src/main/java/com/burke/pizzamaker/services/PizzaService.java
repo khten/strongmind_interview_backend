@@ -21,12 +21,13 @@ public class PizzaService {
 	public Pizza createPizza(Pizza p) {
 		return pizzaRepo.save(p);
 	}
+	
 	public List<Pizza> getAllPizzas(){
 		return pizzaRepo.findAll();
 	}
 	
 	public Pizza getPizzaByName(String s) {
-		return pizzaRepo.findByPizzaName(s).orElseThrow(()->new PizzaNotFoundError("Unable to find pizza: " + s));
+		return pizzaRepo.findByName(s).orElseThrow(()->new PizzaNotFoundError("Unable to find pizza: " + s));
 	}
 	
 	

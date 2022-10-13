@@ -10,7 +10,8 @@ import com.burke.pizzamaker.models.Pizza;
 @Repository
 public interface PizzaRepo extends JpaRepository<Pizza, Integer> {
 
-	Optional<Pizza> findByPizzaName(String s);
+	Optional<Pizza> findByName(String s);
 
+	
 
 }
