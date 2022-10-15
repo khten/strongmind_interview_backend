@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.burke.pizzamaker.exceptions.DuplicateToppingException;
 import com.burke.pizzamaker.models.Topping;
 import com.burke.pizzamaker.services.ToppingService;
 
@@ -36,8 +37,13 @@ public class ToppingController {
 	
 	@PostMapping("/add")
 	public ResponseEntity<Topping> addTopping(@RequestBody Topping t){
-		Topping topping = topServ.addTopping(t);
-		return new ResponseEntity<>(topping, HttpStatus.CREATED);
+		try{
+			Topping topping = topServ.addTopping(t);
+			return new ResponseEntity<>(topping, HttpStatus.CREATED);
+		}catch (DuplicateToppingException e) {
+			return new ResponseEntity<>(t, HttpStatus.BAD_REQUEST);
+		}
+
 	}
 	
 	@DeleteMapping("/delete/{name}")
@@ -50,8 +56,13 @@ public class ToppingController {
 
 	@PutMapping("/update")
 	public ResponseEntity<Topping> updateTopping(@RequestBody Topping t){
-		Topping topping = topServ.updateTopping(t);
-		return new ResponseEntity<>(topping, HttpStatus.OK);
+		t.setName(t.getName().trim());
+		try{
+			Topping topping = topServ.updateTopping(t);
+	        return new ResponseEntity<>(topping, HttpStatus.OK);
+		} catch (DuplicateToppingException e) {
+			return new ResponseEntity<>(t, HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 }
