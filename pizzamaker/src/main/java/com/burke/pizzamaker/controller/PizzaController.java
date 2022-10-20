@@ -14,43 +14,56 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.burke.pizzamaker.exceptions.DuplicatePizzaException;
 import com.burke.pizzamaker.models.Pizza;
+import com.burke.pizzamaker.models.Topping;
 import com.burke.pizzamaker.services.PizzaService;
 
 @RestController
 @CrossOrigin(origins="*", allowedHeaders="*")
 @RequestMapping("/pizza")
 public class PizzaController {
-    
+
 	private final PizzaService pizzaServ;
-	
+
 	public PizzaController(PizzaService pizzaServ) {
 		this.pizzaServ = pizzaServ;
 	}
-	
+
 	@GetMapping("/all")
 	public ResponseEntity<List<Pizza>> getAllPizzas(){
 		List<Pizza> pizzas = pizzaServ.getAllPizzas();
 		return new ResponseEntity<>(pizzas, HttpStatus.OK);
 	}
-	
+
+
 	@PostMapping("/create-new-pizza")
 	public ResponseEntity<Pizza> createPizza(@RequestBody Pizza p){
-		Pizza pizza = pizzaServ.createPizza(p);
-		return new ResponseEntity<>(pizza, HttpStatus.CREATED);
+
+		try{ 
+			Pizza pizza = pizzaServ.createPizza(p);
+			return new ResponseEntity<>(pizza, HttpStatus.CREATED);
+		}catch(DuplicatePizzaException e) {
+			return new ResponseEntity<>( HttpStatus.BAD_REQUEST);
+		}
 	}
-	
+
 	@PutMapping("/update-pizza")
 	public ResponseEntity<Pizza> updatePizza(@RequestBody Pizza p){
-		Pizza pizza = pizzaServ.updatePizza(p);
-		return new ResponseEntity<>(pizza, HttpStatus.OK);
+		try{
+			Pizza pizza = pizzaServ.updatePizza(p);
+			return new ResponseEntity<>(pizza, HttpStatus.OK);
+
+		}catch(DuplicatePizzaException e) {
+			return new ResponseEntity<>( HttpStatus.BAD_REQUEST);
+		}
 	}
-	
-	@DeleteMapping("/delete/{name}")
-	public ResponseEntity<Pizza> deletePizza(@PathVariable("name") String name){
-		Pizza pizza = pizzaServ.getPizzaByName(name);
-		pizzaServ.deletePizza(pizza);
-		return new ResponseEntity<>(pizza, HttpStatus.OK);
+
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<Pizza> deletePizza(@PathVariable("id") int id){
+
+		pizzaServ.deletePizza(id);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
-	
+
 }

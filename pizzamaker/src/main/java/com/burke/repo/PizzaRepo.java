@@ -14,7 +14,7 @@ public interface PizzaRepo extends JpaRepository<Pizza, Integer> {
 
 	Optional<Pizza> findByName(String s);
 
-	
+
 	
 
 }

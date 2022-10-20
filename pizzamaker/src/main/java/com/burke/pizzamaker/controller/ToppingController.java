@@ -46,11 +46,10 @@ public class ToppingController {
 
 	}
 	
-	@DeleteMapping("/delete/{name}")
-	public ResponseEntity<Topping> deleteTopping(@PathVariable("name") String name){
-		Topping topping = topServ.getToppingByName(name);
-	    topServ.deleteTopping(topping);
-		return new ResponseEntity<>(topping, HttpStatus.OK);
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<Topping> deleteTopping(@PathVariable("id") int id){
+	    topServ.deleteTopping(id);
+		return new ResponseEntity<>( HttpStatus.OK);
 		
 	}
 
