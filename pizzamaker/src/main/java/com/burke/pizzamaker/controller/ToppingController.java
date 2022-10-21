@@ -14,11 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.burke.dto.ToppingDTO;
 import com.burke.pizzamaker.exceptions.DuplicateToppingException;
 import com.burke.pizzamaker.models.Topping;
 import com.burke.pizzamaker.services.ToppingService;
-
-import DTO.ToppingDTO;
 
 @CrossOrigin(origins="*", allowedHeaders = "*")
 @RestController
