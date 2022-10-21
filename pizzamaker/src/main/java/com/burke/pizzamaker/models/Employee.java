@@ -34,7 +34,7 @@ public class Employee implements Serializable{
 	private String name;
 	
 	@Enumerated(EnumType.STRING)
-	private Role emp_role;
+	private Role employeeRole;
 	
 	
 	

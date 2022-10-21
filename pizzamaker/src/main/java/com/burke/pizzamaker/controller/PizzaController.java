@@ -37,9 +37,12 @@ public class PizzaController {
 
 
 	@PostMapping("/create-new-pizza")
-	public ResponseEntity<Pizza> createPizza(@RequestBody Pizza p){
+	public ResponseEntity<Pizza> createPizza(@RequestBody PizzaDTO pDTO){
 
 		try{ 
+			Pizza p = new Pizza();
+			p.setName(pDTO.getName());
+			p.setToppings(pDTO.getToppings());
 			Pizza pizza = pizzaServ.createPizza(p);
 			return new ResponseEntity<>(pizza, HttpStatus.CREATED);
 		}catch(DuplicatePizzaException e) {
@@ -48,8 +51,12 @@ public class PizzaController {
 	}
 
 	@PutMapping("/update-pizza")
-	public ResponseEntity<Pizza> updatePizza(@RequestBody Pizza p){
+	public ResponseEntity<Pizza> updatePizza(@RequestBody Pizza pDTO){
 		try{
+			Pizza p = new Pizza();
+			p.setName(pDTO.getName());
+			p.setToppings(pDTO.getToppings());
+	
 			Pizza pizza = pizzaServ.updatePizza(p);
 			return new ResponseEntity<>(pizza, HttpStatus.OK);
 
