@@ -51,9 +51,20 @@ public class PizzaService {
 	    }
 	}
 	public Pizza updatePizza(Pizza p) {
-		p.setName(p.getName().trim());
+		//check for blank toppings
 		if(p.getToppings().isBlank()) throw new InvalidToppingsException("Pizza must have at least 1 topping");
-		checkForDuplicatePizzas(p);
+		
+		List<Pizza> pizzaList = pizzaRepo.findAll();
+		for(Pizza op : pizzaList) {
+			//do not compare it to itself
+			if(p.getId() == op.getId()) continue;
+			//check to make sure name is unique and toppings are unique
+			if(p.getName().equals(op.getName())  || p.getToppings().equals(op.getToppings())) throw new DuplicatePizzaException("Duplicate pizza found");
+		}
+		
+		p.setName(p.getName().trim());
+		
+		
 		return pizzaRepo.save(p);
 	}
 	
