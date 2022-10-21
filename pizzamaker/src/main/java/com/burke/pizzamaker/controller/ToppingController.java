@@ -2,6 +2,7 @@ package com.burke.pizzamaker.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,17 +19,20 @@ import com.burke.pizzamaker.exceptions.DuplicateToppingException;
 import com.burke.pizzamaker.models.Topping;
 import com.burke.pizzamaker.services.ToppingService;
 
+@CrossOrigin(origins="*", allowedHeaders = "*")
 @RestController
-@CrossOrigin(origins="*", allowedHeaders="*")
 @RequestMapping("/toppings")
 public class ToppingController {
 	
 	private final ToppingService topServ;
 	
+	
 	public ToppingController(ToppingService topServ) {
 		this.topServ = topServ;
 	}
 	
+	
+	@CrossOrigin(origins="http://localhost:4200")
 	@GetMapping("/all")
 	public ResponseEntity<List<Topping>> getAvailableToppings (){	
 		List<Topping> toppings = topServ.getAvailableToppings();
@@ -56,6 +60,7 @@ public class ToppingController {
 	@PutMapping("/update")
 	public ResponseEntity<Topping> updateTopping(@RequestBody Topping t){
 		t.setName(t.getName().trim());
+		
 		try{
 			Topping topping = topServ.updateTopping(t);
 	        return new ResponseEntity<>(topping, HttpStatus.OK);
