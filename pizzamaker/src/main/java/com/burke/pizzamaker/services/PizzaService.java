@@ -29,8 +29,8 @@ public class PizzaService {
 		return pizzaRepo.save(p);
 	}
 	public List<Pizza> getAllPizzas(){
-		List<Pizza> pizzas  = pizzaRepo.findAll();
-		return pizzas;
+		return pizzaRepo.findAll();
+		
 	}
 	
 	public Pizza getPizzaByName(String s) {
