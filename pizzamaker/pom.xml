@@ -15,7 +15,7 @@
 	<description>Pizza Maker Interview Question</description>
 	<properties>
 		<java.version>1.8</java.version>
-		<sonar.organization>khten</sonar.organization>
+		<sonar.organization>team007</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
 	
