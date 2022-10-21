@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.burke.pizzamaker.exceptions.DuplicatePizzaException;
 import com.burke.pizzamaker.models.Pizza;
-import com.burke.pizzamaker.models.Topping;
 import com.burke.pizzamaker.services.PizzaService;
 
 @RestController

@@ -8,7 +8,6 @@ import com.burke.pizzamaker.exceptions.DuplicatePizzaException;
 import com.burke.pizzamaker.exceptions.InvalidToppingsException;
 import com.burke.pizzamaker.exceptions.PizzaNotFoundError;
 import com.burke.pizzamaker.models.Pizza;
-import com.burke.pizzamaker.models.Topping;
 import com.burke.repo.PizzaRepo;
 
 @Service
@@ -20,7 +19,7 @@ public class PizzaService {
 	public PizzaService(PizzaRepo pizzaRepo) {
 		this.pizzaRepo = pizzaRepo;
 	}
-	//TODO: check for adding duplicate pizzas
+	
 	public Pizza createPizza(Pizza p) {
 		//make sure that no leading or trailing spaces
 		p.setName(p.getName().trim());
@@ -53,6 +52,7 @@ public class PizzaService {
 	}
 	public Pizza updatePizza(Pizza p) {
 		p.setName(p.getName().trim());
+		if(p.getToppings().isBlank()) throw new InvalidToppingsException("Pizza must have at least 1 topping");
 		checkForDuplicatePizzas(p);
 		return pizzaRepo.save(p);
 	}
