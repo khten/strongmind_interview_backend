@@ -48,7 +48,7 @@ public class EmployeeController {
 	@PostMapping("/add")
 	public ResponseEntity<Employee> addEmployee(@RequestBody EmployeeDTO empDTO){
 	    Employee employee = new Employee();
-	    employee.setEmp_role(empDTO.getRole());
+	    employee.setEmployeeRole(empDTO.getRole());
 	    employee.setName(empDTO.getName());
 	    
 		Employee emp = employeeService.addEmployee(employee);
@@ -58,7 +58,7 @@ public class EmployeeController {
 	@PutMapping("/update")
 	public ResponseEntity<Employee> updateEmployee(@RequestBody EmployeeDTO empDTO){
 		Employee employee = new Employee();
-	    employee.setEmp_role(empDTO.getRole());
+	    employee.setEmployeeRole(empDTO.getRole());
 	    employee.setName(empDTO.getName());
 	    
 		Employee emp = employeeService.updateEmployee(employee);

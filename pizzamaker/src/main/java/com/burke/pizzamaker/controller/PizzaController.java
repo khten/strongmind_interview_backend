@@ -18,6 +18,8 @@ import com.burke.pizzamaker.exceptions.DuplicatePizzaException;
 import com.burke.pizzamaker.models.Pizza;
 import com.burke.pizzamaker.services.PizzaService;
 
+import DTO.PizzaDTO;
+
 @RestController
 @CrossOrigin(origins="*", allowedHeaders="*")
 @RequestMapping("/pizza")
