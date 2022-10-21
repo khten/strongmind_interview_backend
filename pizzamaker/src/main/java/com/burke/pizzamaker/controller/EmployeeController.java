@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.burke.pizzamaker.models.Employee;
 import com.burke.pizzamaker.services.EmployeeService;
 
+import DTO.EmployeeDTO;
+
 @RestController
 @CrossOrigin(origins="*", allowedHeaders="*")
 @RequestMapping("/employee")
@@ -44,13 +46,21 @@ public class EmployeeController {
 	}
 	
 	@PostMapping("/add")
-	public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee){
+	public ResponseEntity<Employee> addEmployee(@RequestBody EmployeeDTO empDTO){
+	    Employee employee = new Employee();
+	    employee.setEmp_role(empDTO.getRole());
+	    employee.setName(empDTO.getName());
+	    
 		Employee emp = employeeService.addEmployee(employee);
 		return new ResponseEntity<>(emp, HttpStatus.CREATED);
 	}
 	
 	@PutMapping("/update")
-	public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee){
+	public ResponseEntity<Employee> updateEmployee(@RequestBody EmployeeDTO empDTO){
+		Employee employee = new Employee();
+	    employee.setEmp_role(empDTO.getRole());
+	    employee.setName(empDTO.getName());
+	    
 		Employee emp = employeeService.updateEmployee(employee);
 		return new ResponseEntity<>(emp, HttpStatus.OK);
 	}

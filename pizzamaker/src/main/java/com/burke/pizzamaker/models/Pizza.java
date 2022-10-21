@@ -33,7 +33,7 @@ public class Pizza {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	//TODO  check for unique names
+	
 	@Column(nullable = false)
 	private String name;
 

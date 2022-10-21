@@ -2,7 +2,6 @@ package com.burke.pizzamaker.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.burke.pizzamaker.exceptions.DuplicateToppingException;
 import com.burke.pizzamaker.models.Topping;
 import com.burke.pizzamaker.services.ToppingService;
+
+import DTO.ToppingDTO;
 
 @CrossOrigin(origins="*", allowedHeaders = "*")
 @RestController
@@ -40,12 +41,14 @@ public class ToppingController {
 	}
 	
 	@PostMapping("/add")
-	public ResponseEntity<Topping> addTopping(@RequestBody Topping t){
+	public ResponseEntity<Topping> addTopping(@RequestBody ToppingDTO tDTO){
 		try{
+			Topping t = new Topping();
+			t.setName(tDTO.getName().trim());
 			Topping topping = topServ.addTopping(t);
 			return new ResponseEntity<>(topping, HttpStatus.CREATED);
 		}catch (DuplicateToppingException e) {
-			return new ResponseEntity<>(t, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 
 	}
@@ -58,14 +61,15 @@ public class ToppingController {
 	}
 
 	@PutMapping("/update")
-	public ResponseEntity<Topping> updateTopping(@RequestBody Topping t){
-		t.setName(t.getName().trim());
-		
+	public ResponseEntity<Topping> updateTopping(@RequestBody ToppingDTO tDTO){
+			
 		try{
+			Topping t = new Topping();
+			t.setName(tDTO.getName().trim());		
 			Topping topping = topServ.updateTopping(t);
 	        return new ResponseEntity<>(topping, HttpStatus.OK);
 		} catch (DuplicateToppingException e) {
-			return new ResponseEntity<>(t, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}
 	

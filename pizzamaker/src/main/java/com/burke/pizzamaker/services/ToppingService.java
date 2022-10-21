@@ -29,11 +29,7 @@ public class ToppingService {
 	}
 	
 	public Topping updateTopping(Topping t) {
-		//trim the names
-		t.setName(t.getName().trim());
-		if(topRepo.findByName(t.getName()).isPresent()) 
-			throw new DuplicateToppingException("Topping with name " + "\"" + t.getName() + "\" already exists");
-		return topRepo.save(t);
+		return addTopping(t);
 	}
 	
 	public Topping addTopping(Topping t) {
