@@ -14,11 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.burke.dto.PizzaDTO;
 import com.burke.pizzamaker.exceptions.DuplicatePizzaException;
 import com.burke.pizzamaker.models.Pizza;
 import com.burke.pizzamaker.services.PizzaService;
-
-import DTO.PizzaDTO;
 
 @RestController
 @CrossOrigin(origins="*", allowedHeaders="*")
@@ -53,7 +52,7 @@ public class PizzaController {
 	}
 
 	@PutMapping("/update-pizza")
-	public ResponseEntity<Pizza> updatePizza(@RequestBody Pizza pDTO){
+	public ResponseEntity<Pizza> updatePizza(@RequestBody PizzaDTO pDTO){
 		try{
 			Pizza p = new Pizza();
 			p.setName(pDTO.getName());

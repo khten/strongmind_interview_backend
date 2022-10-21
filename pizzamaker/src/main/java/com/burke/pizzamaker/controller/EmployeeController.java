@@ -14,10 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.burke.dto.EmployeeDTO;
 import com.burke.pizzamaker.models.Employee;
 import com.burke.pizzamaker.services.EmployeeService;
-
-import DTO.EmployeeDTO;
 
 @RestController
 @CrossOrigin(origins="*", allowedHeaders="*")

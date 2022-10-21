@@ -1,4 +1,4 @@
-package DTO;
+package com.burke.dto;
 
 import com.burke.pizzamaker.enums.Role;
 
