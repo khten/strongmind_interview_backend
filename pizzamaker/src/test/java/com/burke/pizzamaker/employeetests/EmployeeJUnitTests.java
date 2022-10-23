@@ -8,8 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.burke.pizzamaker.enums.Role;
 import com.burke.pizzamaker.models.Employee;
 
-@SpringBootTest(classes = EmployeeJUnitTests.class)
-public class EmployeeJUnitTests {
+
+class EmployeeJUnitTests {
 	
 	//************************************************
 		//Employee Tests
@@ -17,7 +17,7 @@ public class EmployeeJUnitTests {
 		private  Employee e;
 		
 		@BeforeEach
-		public void initEmployee() {
+		 void initEmployee() {
 			e = new Employee(1L, "Bob", Role.OWNER);
 		}
 		

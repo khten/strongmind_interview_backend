@@ -25,8 +25,8 @@ import com.burke.pizzamaker.services.PizzaService;
 import com.burke.repo.PizzaRepo;
 
 @ExtendWith(MockitoExtension.class)
-public class PizzaServiceTests {
-	
+class PizzaServiceTests {
+
 	@Mock
 	private PizzaRepo repo;
 
@@ -35,80 +35,80 @@ public class PizzaServiceTests {
 
 	private Pizza p;
 	@BeforeEach
-	public void init() {
+	void init() {
 		p = new Pizza(1, "Monster", "pepperoni");
 	}
-	
+
 	@Test
-	public void createPizzaTest() {
+	void createPizzaTest() {
 		when(repo.save(p)).thenReturn(p);
 		assertEquals(p, service.createPizza(p));
 	}
-	
+
 	@Test
-	public void createPizzaWithExceptionInvalidToppings() {
+	void createPizzaWithExceptionInvalidToppings() {
 		p.setToppings("");
 		when(repo.save(p)).thenThrow(InvalidToppingsException.class);
-		
+
 		InvalidToppingsException exception = assertThrows(InvalidToppingsException.class, () -> repo.save(p));
-		
-		 assertNotNull(exception);
-		
+
+		assertNotNull(exception);
+
 	}
-	
+
 	@Test
-	public void getAllPizzasTest() {
+	void getAllPizzasTest() {
 		when(repo.findAll()).thenReturn(Stream.of(new Pizza(1, "monster", "pep"), new Pizza(2, "pepperoni", "pepper"), new Pizza(3, "olive", "olive")).collect(Collectors.toList()));
 		assertEquals(3, service.getAllPizzas().size() );
-		
+
 	}
-	
+
 	@Test
-	public void getPizzasByNameTest() {	
+	void getPizzasByNameTest() {	
 		when(repo.findByName("Monster")).thenReturn(Optional.of(p));
 		assertEquals(p, service.getPizzaByName("Monster"));
 	}
-	
+
 	@Test
-	public void getPizzasByNameExceptionTest() {
+	void getPizzasByNameExceptionTest() {
 		when(repo.findByName("Monster")).thenThrow(PizzaNotFoundError.class);
 		PizzaNotFoundError exception = assertThrows(PizzaNotFoundError.class, () -> repo.findByName("Monster"));
-		
-	    assertNotNull(exception);
-		
+
+		assertNotNull(exception);
+
 	}
-	
+
 	@Test
-	public void getPizzaToppingsTest() {	
+	void getPizzaToppingsTest() {	
 		when(repo.findById(1)).thenReturn(Optional.of(p));
 		assertEquals(p.getToppings(), service.getPizzaToppings(1));
 	}
-	
+
 	@Test
-	public void getPizzaToppingsExceptionTest() {
+	void getPizzaToppingsExceptionTest() {
 		when(repo.findById(-1)).thenThrow(PizzaNotFoundError.class);
 		PizzaNotFoundError exception = assertThrows(PizzaNotFoundError.class, () -> repo.findById(-1));
-		
-	    assertNotNull(exception);
-		
+
+		assertNotNull(exception);
+
 	}
-	
+
 	@Test
-	public void updatePizzaTest() {
+	void updatePizzaTest() {
 		when(repo.findAll()).thenReturn(Stream.of(new Pizza(1, "monster", "pep"), new Pizza(2, "pepperoni", "pepper"), new Pizza(3, "olive", "olive")).collect(Collectors.toList()));
 		when(repo.save(p)).thenReturn(p);
-		
+
 		assertEquals(p, service.updatePizza(p));
 	}
-	
+
 	@Test
-	public void deletePizzaTest() {
-		
+	void deletePizzaTest() {
+
 		service.deletePizza(p.getId());
 		verify(repo,times(1)).deleteById(p.getId());
 	}
-	
-	
-	
-	
+
+
+
+
 }
