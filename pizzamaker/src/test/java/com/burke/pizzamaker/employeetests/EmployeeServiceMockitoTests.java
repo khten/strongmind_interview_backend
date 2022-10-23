@@ -10,25 +10,24 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.burke.pizzamaker.enums.Role;
 import com.burke.pizzamaker.models.Employee;
 import com.burke.pizzamaker.services.EmployeeService;
 import com.burke.repo.EmployeeRepo;
 
-@SpringBootTest(classes=EmployeeServiceMockitoTests.class)
+@ExtendWith(MockitoExtension.class)
 public class EmployeeServiceMockitoTests {
 
-	@Autowired
-	private EmployeeService service;
-	
-	@MockBean
+	@Mock
 	private EmployeeRepo repo;
 	
-	
+	@InjectMocks
+	private EmployeeService service;
 	
 	
 	

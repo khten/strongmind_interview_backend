@@ -13,9 +13,10 @@ import java.util.stream.Stream;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.burke.pizzamaker.exceptions.InvalidToppingsException;
 import com.burke.pizzamaker.exceptions.PizzaNotFoundError;
@@ -23,15 +24,15 @@ import com.burke.pizzamaker.models.Pizza;
 import com.burke.pizzamaker.services.PizzaService;
 import com.burke.repo.PizzaRepo;
 
-@SpringBootTest(classes = PizzaServiceTests.class)
+@ExtendWith(MockitoExtension.class)
 public class PizzaServiceTests {
-
-	@Autowired
-	private PizzaService service;
 	
-	@MockBean
+	@Mock
 	private PizzaRepo repo;
-	
+
+	@InjectMocks
+	private PizzaService service;
+
 	private Pizza p;
 	@BeforeEach
 	public void init() {

@@ -11,24 +11,29 @@ import java.util.stream.Stream;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.burke.pizzamaker.models.Topping;
 import com.burke.pizzamaker.services.ToppingService;
 import com.burke.repo.ToppingRepo;
 
-@SpringBootTest(classes = {ToppingServiceTests.class})
+//@SpringBootTest(classes = {ToppingServiceTests.class})
+@ExtendWith(MockitoExtension.class)
 public class ToppingServiceTests {
+
 
 	private Topping t;
 	
-	@Autowired
+	@Mock
+	private ToppingRepo repo;
+	
+	@InjectMocks
 	private ToppingService service;
 	
-	@MockBean
-	private ToppingRepo repo;
+	
 	
 	
 	@BeforeEach
