@@ -19,7 +19,7 @@ import com.burke.pizzamaker.models.Employee;
 import com.burke.pizzamaker.services.EmployeeService;
 import com.burke.repo.EmployeeRepo;
 
-@SpringBootTest
+@SpringBootTest(classes=EmployeeServiceMockitoTests.class)
 public class EmployeeServiceMockitoTests {
 
 	@Autowired

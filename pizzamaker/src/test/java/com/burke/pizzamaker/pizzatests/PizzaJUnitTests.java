@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.burke.pizzamaker.models.Pizza;
 
-@SpringBootTest
+@SpringBootTest(classes = PizzaJUnitTests.class)
 public class PizzaJUnitTests {
 
 			

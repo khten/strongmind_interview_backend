@@ -23,7 +23,7 @@ import com.burke.pizzamaker.models.Pizza;
 import com.burke.pizzamaker.services.PizzaService;
 import com.burke.repo.PizzaRepo;
 
-@SpringBootTest
+@SpringBootTest(classes = PizzaServiceTests.class)
 public class PizzaServiceTests {
 
 	@Autowired
