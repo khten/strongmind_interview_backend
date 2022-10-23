@@ -8,38 +8,40 @@ import org.junit.jupiter.api.Test;
 import com.burke.pizzamaker.models.Topping;
 
 
-public class ToppingJUnitTests {
+class ToppingJUnitTests {
 
 	//************************************'
 	// Topping Unit Tests
 	//*************************************
-	
-	 
+
+
 	private Topping t;
-	
+
 	@BeforeEach
-	public void initTopping() {
+	void initTopping() {
 		t = new Topping(1, "pepperoni");
 	}
-	
+
 	@Test
-	public void toppingGetIdTest() {
+	void toppingGetIdTest() {
 		assertEquals(1, t.getId());
 	}
-	
+
 	@Test
-	public void toppingSetIdTest() {
+	void toppingSetIdTest() {
 		t.setId(2);
 		assertEquals(2, t.getId());
 	}
-	
-	@Test void toppingGetNameTest() {
+
+	@Test 
+	void toppingGetNameTest() {
 		assertEquals("pepperoni", t.getName());
 	}
-	
-	@Test void toppingSetNameTest() {
+
+	@Test 
+	void toppingSetNameTest() {
 		t.setName("olives");
 		assertEquals("olives", t.getName());
 	}
-	
+
 }

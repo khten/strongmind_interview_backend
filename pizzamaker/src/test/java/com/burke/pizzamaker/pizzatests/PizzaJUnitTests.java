@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.burke.pizzamaker.models.Pizza;
 
 
-public class PizzaJUnitTests {
+class PizzaJUnitTests {
 
 			
 		//************************************************
@@ -17,7 +17,7 @@ public class PizzaJUnitTests {
 			private  Pizza p;
 			
 			@BeforeEach
-			public void initPizza() {
+			 void initPizza() {
 				 p = new Pizza(1, "Bob", "Pepperoni");
 			}
 			

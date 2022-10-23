@@ -21,7 +21,7 @@ import com.burke.pizzamaker.services.EmployeeService;
 import com.burke.repo.EmployeeRepo;
 
 @ExtendWith(MockitoExtension.class)
-public class EmployeeServiceMockitoTests {
+class EmployeeServiceMockitoTests {
 
 	@Mock
 	private EmployeeRepo repo;
@@ -32,7 +32,7 @@ public class EmployeeServiceMockitoTests {
 	
 	
 	@Test
-	public void addEmployeeTest() {
+	 void addEmployeeTest() {
 		Employee emp = new Employee(1L, "Dan", Role.CHEF);
 		when(repo.save(emp)).thenReturn(emp);
 		
@@ -40,13 +40,13 @@ public class EmployeeServiceMockitoTests {
 	}
 	
 	@Test
-	public void deleteEmployeeTest() {
+	 void deleteEmployeeTest() {
 		Employee emp = new Employee(1L, "Dan", Role.CHEF);
 		service.deleteEmployee(emp);
 		verify(repo,times(1)).delete(emp);
 	}
 	@Test
-	public void getEmployeeByIdTest() {
+	 void getEmployeeByIdTest() {
 		Long id = 2L;
         Employee emp = new Employee(id, "Dan", Role.CHEF);
 		when(repo.findById(id)).thenReturn(Optional.of(emp));
@@ -56,7 +56,7 @@ public class EmployeeServiceMockitoTests {
 	}
 	
 	@Test
-	public void updateEmployeeTest() {
+	 void updateEmployeeTest() {
 		Employee emp = new Employee(1L, "Dan", Role.CHEF);
 		when(repo.save(emp)).thenReturn(emp);
 		
@@ -64,7 +64,7 @@ public class EmployeeServiceMockitoTests {
 	}
 	
 	@Test
-	public void findAllEmployeesTest() {
+	 void findAllEmployeesTest() {
 		when(repo.findAll()).thenReturn(Stream.of(new Employee(1L, "Dan", Role.OWNER), new Employee(2L, "Bob", Role.CHEF), new Employee(3L, "Sara", Role.CHEF)).collect(Collectors.toList()));
 		
 		assertEquals(3, service.findAllEmployees().size());
