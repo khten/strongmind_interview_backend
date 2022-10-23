@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.burke.pizzamaker.models.Topping;
 
-@SpringBootTest
+@SpringBootTest(classes = {ToppingJUnitTests.class})
 public class ToppingJUnitTests {
 
 	//************************************'

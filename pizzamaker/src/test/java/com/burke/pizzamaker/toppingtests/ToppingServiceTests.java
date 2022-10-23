@@ -19,7 +19,7 @@ import com.burke.pizzamaker.models.Topping;
 import com.burke.pizzamaker.services.ToppingService;
 import com.burke.repo.ToppingRepo;
 
-@SpringBootTest
+@SpringBootTest(classes = {ToppingServiceTests.class})
 public class ToppingServiceTests {
 
 	private Topping t;
