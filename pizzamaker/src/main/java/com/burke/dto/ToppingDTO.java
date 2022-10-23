@@ -1,14 +1,21 @@
 package com.burke.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
 public class ToppingDTO {
 
-	private String name;
+	private int id;
 	
-	public ToppingDTO(String name) {
-		this.name = name;
-	}
+	private String name;
 	
 	public String getName() {
 		return this.name;
+	}
+	
+	public int getId() {
+		return this.id;
 	}
 }

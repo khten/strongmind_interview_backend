@@ -22,19 +22,25 @@ public class ToppingService {
 		return topRepo.findAll();
 	}
 	
-	
+	public Topping findById(int id) {
+		return topRepo.findById(id).orElseThrow(()-> new ToppingNotFoundException("Unable to find topping with id: " + id));
+	}
 	public void deleteTopping(int id) {
 		Topping t = topRepo.findById(id).orElseThrow(()-> new ToppingNotFoundException("Unable to find topping with id: " + id));
 		topRepo.delete(t);
 	}
 	
 	public Topping updateTopping(Topping t) {
-		return addTopping(t);
+		if(topRepo.findByName(t.getName().trim()).isPresent()) {
+			throw new DuplicateToppingException ("Topping with that name already exists");
+		}
+		return topRepo.save(t); 
 	}
 	
-	public Topping addTopping(Topping t) {
+	public Topping addTopping(String name) {
 		//trim the names
-		t.setName(t.getName().trim());
+		Topping t = new Topping();
+		t.setName(name.trim());
 		if(topRepo.findByName(t.getName()).isPresent()) throw new DuplicateToppingException("Topping with name " + "\"" + t.getName() + "\" already exists");
 		return topRepo.save(t);
 	}
