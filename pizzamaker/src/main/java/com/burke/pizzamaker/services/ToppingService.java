@@ -32,7 +32,7 @@ public class ToppingService {
 	}
 	
 	public Topping updateTopping(Topping t) {
-		if(t.getName().isBlank()) throw new InvalidToppingException("Topping must have a name");
+		if(t.getName().isEmpty()) throw new InvalidToppingException("Topping must have a name");
 		if(topRepo.findByName(t.getName().trim()).isPresent()) {
 			throw new DuplicateToppingException ("Topping with that name already exists");
 		}
@@ -43,7 +43,7 @@ public class ToppingService {
 		//trim the names
 		Topping t = new Topping();
 		t.setName(name.trim());
-		if(t.getName().isBlank())throw new InvalidToppingException("Topping must have a name");
+		if(t.getName().isEmpty())throw new InvalidToppingException("Topping must have a name");
 		if(topRepo.findByName(t.getName()).isPresent()) throw new DuplicateToppingException("Topping with name " + "\"" + t.getName() + "\" already exists");
 		
 		return topRepo.save(t);
