@@ -2,6 +2,7 @@ package com.burke.dto;
 
 public class PizzaDTO {
 
+	private int id;
 	private String name;
 	private String toppings;
 	
@@ -11,10 +12,14 @@ public class PizzaDTO {
 	}
 	
 	public String getName() {
-		return name;
+		return this.name;
 	}
 	
 	public String getToppings() {
-		return toppings;
+		return this.toppings;
+	}
+	
+	public int getId() {
+		return this.id;
 	}
 }

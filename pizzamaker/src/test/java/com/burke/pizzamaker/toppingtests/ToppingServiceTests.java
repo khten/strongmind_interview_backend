@@ -64,6 +64,6 @@ class ToppingServiceTests {
 	@Test
 	void addToppingTest() {
 		when(repo.save(t)).thenReturn(t);
-		assertEquals(t, service.addTopping(t));
+		assertEquals(t, service.addTopping(t.getName()));
 	}
 }

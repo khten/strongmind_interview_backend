@@ -32,7 +32,7 @@ public class ToppingController {
 	}
 	
 	
-	@CrossOrigin(origins="http://localhost:4200")
+	
 	@GetMapping("/all")
 	public ResponseEntity<List<Topping>> getAvailableToppings (){	
 		List<Topping> toppings = topServ.getAvailableToppings();
@@ -40,13 +40,16 @@ public class ToppingController {
 	}
 	
 	@PostMapping("/add")
-	public ResponseEntity<Topping> addTopping(@RequestBody ToppingDTO tDTO){
+	public ResponseEntity<Topping> addTopping(@RequestBody String name){
 		try{
 			Topping t = new Topping();
-			t.setName(tDTO.getName().trim());
-			Topping topping = topServ.addTopping(t);
+			t.setName(name.trim());
+			
+			Topping topping = topServ.addTopping(t.getName());
 			return new ResponseEntity<>(topping, HttpStatus.CREATED);
 		}catch (DuplicateToppingException e) {
+			
+			
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 
@@ -63,11 +66,13 @@ public class ToppingController {
 	public ResponseEntity<Topping> updateTopping(@RequestBody ToppingDTO tDTO){
 			
 		try{
-			Topping t = new Topping();
-			t.setName(tDTO.getName().trim());		
+			Topping t = topServ.findById(tDTO.getId());
+			t.setName(tDTO.getName().trim());
 			Topping topping = topServ.updateTopping(t);
+			
 	        return new ResponseEntity<>(topping, HttpStatus.OK);
 		} catch (DuplicateToppingException e) {
+			
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 	}

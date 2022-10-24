@@ -55,6 +55,7 @@ public class PizzaController {
 	public ResponseEntity<Pizza> updatePizza(@RequestBody PizzaDTO pDTO){
 		try{
 			Pizza p = new Pizza();
+			p.setId(pDTO.getId());
 			p.setName(pDTO.getName());
 			p.setToppings(pDTO.getToppings());
 	
