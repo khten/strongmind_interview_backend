@@ -24,7 +24,7 @@ public class PizzaService {
 	public Pizza createPizza(Pizza p) {
 		//make sure that no leading or trailing spaces
 		p.setName(p.getName().trim());
-		if(p.getToppings().isBlank()) throw new InvalidPizzaException("Pizza must have at least 1 topping"); 
+		if(p.getToppings().isEmpty()) throw new InvalidPizzaException("Pizza must have at least 1 topping"); 
 		//check to make sure that such a pizza does not already exist
 		checkForDuplicatePizzas(p);
 		return pizzaRepo.save(p);
@@ -53,8 +53,8 @@ public class PizzaService {
 	}
 	public Pizza updatePizza(Pizza p) {
 		//check for blank toppings
-		if(p.getToppings().isBlank()) throw new InvalidPizzaException("Pizza must have at least 1 topping");
-		if(p.getName().isBlank()) throw new InvalidPizzaException("Pizza must have a name");
+		if(p.getToppings().isEmpty()) throw new InvalidPizzaException("Pizza must have at least 1 topping");
+		if(p.getName().isEmpty()) throw new InvalidPizzaException("Pizza must have a name");
 		//remove leading and trailing spaces in the pizza name
 		p.setName(p.getName().trim());
 		
