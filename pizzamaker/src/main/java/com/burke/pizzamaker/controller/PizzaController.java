@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.burke.dto.PizzaDTO;
-import com.burke.pizzamaker.exceptions.DuplicatePizzaException;
 import com.burke.pizzamaker.models.Pizza;
 import com.burke.pizzamaker.services.PizzaService;
 
@@ -46,9 +45,10 @@ public class PizzaController {
 			p.setToppings(pDTO.getToppings());
 			Pizza pizza = pizzaServ.createPizza(p);
 			return new ResponseEntity<>(pizza, HttpStatus.CREATED);
-		}catch(DuplicatePizzaException e) {
+		}catch(RuntimeException e) {
 			return new ResponseEntity<>( HttpStatus.BAD_REQUEST);
 		}
+	
 	}
 
 	@PutMapping("/update-pizza")
@@ -62,7 +62,7 @@ public class PizzaController {
 			Pizza pizza = pizzaServ.updatePizza(p);
 			return new ResponseEntity<>(pizza, HttpStatus.OK);
 
-		}catch(DuplicatePizzaException e) {
+		}catch(RuntimeException e) {
 			return new ResponseEntity<>( HttpStatus.BAD_REQUEST);
 		}
 	}
