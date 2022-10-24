@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.burke.dto.ToppingDTO;
-import com.burke.pizzamaker.exceptions.DuplicateToppingException;
 import com.burke.pizzamaker.models.Topping;
 import com.burke.pizzamaker.services.ToppingService;
 
@@ -47,7 +46,7 @@ public class ToppingController {
 			
 			Topping topping = topServ.addTopping(t.getName());
 			return new ResponseEntity<>(topping, HttpStatus.CREATED);
-		}catch (DuplicateToppingException e) {
+		}catch (RuntimeException e) {
 			
 			
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -71,7 +70,7 @@ public class ToppingController {
 			Topping topping = topServ.updateTopping(t);
 			
 	        return new ResponseEntity<>(topping, HttpStatus.OK);
-		} catch (DuplicateToppingException e) {
+		} catch (RuntimeException e) {
 			
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
