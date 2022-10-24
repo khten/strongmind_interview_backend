@@ -1,13 +1,13 @@
 package com.burke.pizzamaker.exceptions;
 
-public class InvalidToppingsException extends RuntimeException {
+public class InvalidToppingException extends RuntimeException {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public InvalidToppingsException(String msg) {
+	public InvalidToppingException(String msg) {
 		super(msg);
 	}
 }

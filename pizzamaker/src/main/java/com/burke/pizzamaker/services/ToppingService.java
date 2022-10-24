@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.burke.pizzamaker.exceptions.DuplicateToppingException;
+import com.burke.pizzamaker.exceptions.InvalidToppingException;
 import com.burke.pizzamaker.exceptions.ToppingNotFoundException;
 import com.burke.pizzamaker.models.Topping;
 import com.burke.repo.ToppingRepo;
@@ -31,6 +32,7 @@ public class ToppingService {
 	}
 	
 	public Topping updateTopping(Topping t) {
+		if(t.getName().isBlank()) throw new InvalidToppingException("Topping must have a name");
 		if(topRepo.findByName(t.getName().trim()).isPresent()) {
 			throw new DuplicateToppingException ("Topping with that name already exists");
 		}
@@ -41,7 +43,9 @@ public class ToppingService {
 		//trim the names
 		Topping t = new Topping();
 		t.setName(name.trim());
+		if(t.getName().isBlank())throw new InvalidToppingException("Topping must have a name");
 		if(topRepo.findByName(t.getName()).isPresent()) throw new DuplicateToppingException("Topping with name " + "\"" + t.getName() + "\" already exists");
+		
 		return topRepo.save(t);
 	}
 

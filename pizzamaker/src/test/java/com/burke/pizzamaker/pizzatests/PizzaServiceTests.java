@@ -18,7 +18,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.burke.pizzamaker.exceptions.InvalidToppingsException;
+import com.burke.pizzamaker.exceptions.InvalidToppingException;
+
 import com.burke.pizzamaker.exceptions.PizzaNotFoundError;
 import com.burke.pizzamaker.models.Pizza;
 import com.burke.pizzamaker.services.PizzaService;
@@ -48,9 +49,9 @@ class PizzaServiceTests {
 	@Test
 	void createPizzaWithExceptionInvalidToppings() {
 		p.setToppings("");
-		when(repo.save(p)).thenThrow(InvalidToppingsException.class);
+		when(repo.save(p)).thenThrow(InvalidToppingException.class);
 
-		InvalidToppingsException exception = assertThrows(InvalidToppingsException.class, () -> repo.save(p));
+		InvalidToppingException exception = assertThrows(InvalidToppingException.class, () -> repo.save(p));
 
 		assertNotNull(exception);
 
